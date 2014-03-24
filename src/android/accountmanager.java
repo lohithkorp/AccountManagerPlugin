@@ -20,37 +20,38 @@ public static final String ACTION_AM = "accManager";
 
 @Overridepublic boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException 
 { 
-
-
-if ACTION_EX_PLUGIN.equals(action)) {   
-Pattern emailPattern = Patterns.EMAIL_ADDRESS;           
-Account[] accounts = AccountManager.get(context).getAccounts();
-for (Account account : accounts) {
-    if (emailPattern.matcher(account.name).matches()) {
-        String possibleEmail = account.name;
+  if (ACTION_EX_PLUGIN(action)) {
+            	try{
+            		    Pattern emailPattern = Patterns.EMAIL_ADDRESS;           
+                        Account[] accounts = AccountManager.get(context).getAccounts();
+                        for (Account account : accounts) {
+                            if (emailPattern.matcher(account.name).matches()) {
+                                    String possibleEmail = account.name;
+                                     result = new PluginResult(PluginResult.Status.OK, possibleEmail);
+                                 }
+                            
+                         }
+                                
+            	    }
+            	catch(Exception e){
+            		
+                    result = new PluginResult(PluginResult.Status.Error);
+            		
+            	}
+            	else {
+                    result = new PluginResult(PluginResult.Status.INVALID_ACTION);
+                    Log.d(logId, "Invalid action : "+action+" passed");
+            }
         
-    }
-}
-return true;
 
-}
-    
-return false;
+        return result;
+               
+            }
 
-
-}
-
-private void echo(String message, CallbackContext callbackContext) 
-{            
-if (message != null && message.length() > 0) 
-{                
-callbackContext.success(message);            
-} 
-else 
-{                
-callbackContext.error("Expected one non-empty string argument.");            
-}        
-}
 
 
 }
+
+
+
+
