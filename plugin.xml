@@ -17,7 +17,7 @@
 </feature>        
 </config-file>  
 
-<config-file target="res/xml/config.xml" parent="/manifest">
+<config-file target="AndroidManifest.xml" parent="/manifest/application">
 
 <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
